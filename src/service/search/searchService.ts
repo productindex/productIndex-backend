@@ -2,28 +2,17 @@ const searchRepo = require("./searchRepo");
 
 
 const businessFuzzySearch = async (searchCriteria: string, location: string) => {
+    const storeLocation = location.toLocaleUpperCase()
+    const criteria = searchCriteria.toLocaleUpperCase()
     if (!searchCriteria) throw Error("Business name is required");
     try {
-      return await searchRepo.businessSearch(
-        searchCriteria.trim().toLocaleUpperCase(), location
-      );
+      return await searchRepo.businessSearch(criteria, storeLocation);
     } catch (e) {
       throw e;
     }
   };
 
-const productFuzzySearch = async (searchCriteria: string, product_type: string, location: string) => {
-    if (!searchCriteria) throw Error("Business name is required");
-    try {
-      return await searchRepo.productSearch(
-        searchCriteria.trim().toLocaleUpperCase(), product_type, location
-      );
-    } catch (e) {
-      throw e;
-    }
-  };
 
 module.exports = {
-  businessFuzzySearch,
-  productFuzzySearch
+  businessFuzzySearch
 };
